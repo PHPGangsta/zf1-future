@@ -47,7 +47,7 @@ require_once 'Zend/Mail/Part/Interface.php';
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface
+class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface, Countable
 {
     /**
      * headers of part as array
@@ -579,6 +579,14 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface
     {
         $this->countParts();
         $this->_iterationPos = 1;
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return $this->countParts();
     }
 
     /**

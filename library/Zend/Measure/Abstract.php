@@ -287,10 +287,11 @@ abstract class Zend_Measure_Abstract
                 $value = call_user_func(Zend_Locale_Math::$div, $value, $this->_units[$type][0], 25);
             }
 
+            $sValue = (string) $value;
             $slength = strlen($value);
             $length  = 0;
             for($i = 1; $i <= $slength; ++$i) {
-                if ($value[$slength - $i] != '0') {
+                if ($sValue[$slength - $i] != '0') {
                     $length = 26 - $i;
                     break;
                 }

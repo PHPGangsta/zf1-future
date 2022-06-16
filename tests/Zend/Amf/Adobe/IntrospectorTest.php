@@ -172,29 +172,32 @@ class com_zend_framework_IntrospectorTest
      * Foobar
      *
      * @param  string|int $arg
-     * @return void
+     * @return string|stdClass
      */
     public function foobar($arg)
     {
+        return $arg;
     }
 
     /**
      * Barbaz
      *
      * @param  com_zend_framework_IntrospectorTestCustomType $arg
-     * @return void
+     * @return boolean
      */
     public function barbaz($arg)
     {
+        return true;
     }
 
     /**
      * Bazbat
      *
-     * @return void
+     * @return com_zend_framework_IntrospectorTestExplicitType
      */
     public function bazbat()
     {
+        return new com_zend_framework_IntrospectorTestExplicitType();
     }
 }
 

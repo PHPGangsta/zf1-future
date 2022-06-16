@@ -129,11 +129,11 @@ class Zend_Soap_AutoDiscover_TestFixingMultiplePrototypes
      * @param integer $a
      * @param integer $b
      * @param integer $d
-     * @return void
+     * @return integer
      */
     function testFunc($a=100, $b=200, $d=300)
     {
-
+        return 1;
     }
 }
 
@@ -346,22 +346,34 @@ class Zend_Soap_AutoDiscover_MyService
 {
     /**
      *    @param string $foo
-     *    @return void
+     *    @return Zend_Soap_AutoDiscover_MyResponse[]
      */
     public function foo($foo) {
+        return [
+            new Zend_Soap_AutoDiscover_MyResponse($foo),
+            new Zend_Soap_AutoDiscover_MyResponse($foo),
+        ];
     }
     /**
      *    @param string $bar
-     *    @return void
+     *    @return Zend_Soap_AutoDiscover_MyResponse[]
      */
     public function bar($bar) {
+        return [
+            new Zend_Soap_AutoDiscover_MyResponse($bar),
+            new Zend_Soap_AutoDiscover_MyResponse($bar),
+        ];
     }
 
     /**
      *    @param string $baz
-     *    @return void
+     *    @return Zend_Soap_AutoDiscover_MyResponse[]
      */
     public function baz($baz) {
+        return [
+            new Zend_Soap_AutoDiscover_MyResponse($baz),
+            new Zend_Soap_AutoDiscover_MyResponse($baz),
+        ];
     }
 }
 
@@ -376,29 +388,36 @@ class Zend_Soap_AutoDiscover_MyServiceSequence
 {
     /**
      *    @param string $foo
-     *    @return void
+     *    @return string[]
      */
     public function foo($foo) {
+        return [$foo, $foo];
     }
     /**
      *    @param string $bar
-     *    @return void
+     *    @return string[]
      */
     public function bar($bar) {
+        return [$bar, $bar];
     }
 
     /**
      *    @param string $baz
-     *    @return void
+     *    @return string[]
      */
     public function baz($baz) {
+        return [$baz, $baz];
     }
 
     /**
      *    @param string $baz
-     *    @return void
+     *    @return string[][][]
      */
     public function bazNested($baz) {
+        return [[
+            [$baz, $baz],
+            [$baz, $baz],
+        ]];
     }
 }
 
@@ -432,9 +451,11 @@ class Zend_Soap_AutoDiscover_Recursion
     public $recursion;
 
     /**
-     * @return void
+     * @return Zend_Soap_AutoDiscover_Recursion
      */
-    public function create() {}
+    public function create() {
+        return new Zend_Soap_AutoDiscover_Recursion();
+    }
 }
 
 /**

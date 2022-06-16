@@ -40,7 +40,7 @@ class Zend_Amf_Value_Messaging_AcknowledgeMessage extends Zend_Amf_Value_Messagi
     /**
      * Create a new Acknowledge Message
      */
-    public function __construct(?\Zend_Amf_Value_Messaging_AbstractMessage $message)
+    public function __construct($message)
     {
         $this->clientId    = $this->generateId();
         $this->destination = null;
