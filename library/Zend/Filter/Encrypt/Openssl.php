@@ -465,7 +465,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
             $value = substr($value, $length);
         }
 
-        $crypt  = openssl_open($value, $decrypted, $envelope, $keys);
+        $crypt  = openssl_open($value, $decrypted, $envelope, $keys, 'RC4');
         if (PHP_VERSION_ID < 80000) {
             openssl_free_key($keys);
         }

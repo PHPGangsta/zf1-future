@@ -38,12 +38,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        operating-system: [ubuntu-latest]
+        operating-system: [ubuntu-20.04]
         php-versions: ['7.1', '7.4', '8.0']
         #php-versions: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
         composer-args: ['']
         #composer-args: ['', '--prefer-lowest']
     runs-on: ${{ matrix.operating-system }}
+    env:
+      MYSQL_USER: "zftest"
+      MYSQL_PASSWORD: "zftest"
+      MYSQL_DATABASE: "zftest"
+      MYSQL_HOST: "127.0.0.1"
+      POSTGRES_USER: "zftest"
+      POSTGRES_PASSWORD: "zftest"
+      POSTGRES_DB: "zftest"
+      POSTGRES_HOST: "127.0.0.1"
+      # Default locales are: C C.UTF-8 POSIX en_US.utf8
+      LOCALES: "fr_FR@euro fr_FR fr_BE.UTF-8 de en_US"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -69,5 +80,12 @@ jobs:
       - name: Install Dependencies
         run: |
           composer update --no-progress --no-suggest --prefer-stable --optimize-autoloader ${{ matrix.composer-args }}
+      - name: Setup environment for PHPUnit
+        run: |
+          echo "Existing locales"
+          locale -a
+          sudo apt-get update && sudo apt-get install tzdata locales -y && sudo locale-gen $LOCALES
+          echo "All languages..."
+          locale -a
       - name: Test
         run: cd tests/ && php runalltests.php
