@@ -123,11 +123,7 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $request = $this->_buildRequest('GET', '/');
         $values = $this->_invokeRouteMatch($request);
 
-        $this->assertTrue(is_array($values));
-        $this->assertTrue(isset($values['module']));
-        $this->assertEquals('default', $values['module']);
-        $this->assertEquals('index', $values['controller']);
-        $this->assertEquals('index', $values['action']);
+        $this->assertFalse($values);
     }
 
     /*

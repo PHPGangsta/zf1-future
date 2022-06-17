@@ -234,7 +234,7 @@ class Zend_Filter_HtmlEntitiesTest extends PHPUnit_Framework_TestCase
      */
     public function testStripsUnknownCharactersWhenEncodingMismatchDetected()
     {
-        if (PHP_VERSION_ID >= 70000 && PHP_VERSION_ID < 70100) {
+        if (PHP_VERSION_ID >= 50400) {
             $this->markTestIncomplete('Tested feature ZF-11344 is not available because of PHP bug #63450');
         }
 
@@ -254,6 +254,12 @@ class Zend_Filter_HtmlEntitiesTest extends PHPUnit_Framework_TestCase
      */
     public function testRaisesExceptionIfEncodingMismatchDetectedAndFinalStringIsEmpty()
     {
+        if (strtolower(substr(PHP_OS, 0, 3)) == 'win') {
+            // see ZF-12201
+            $this->markTestIncomplete('Exception is not thrown on Windows');
+            return;
+        }
+
         $string = file_get_contents(dirname(__FILE__) . '/_files/latin-1-dash-only.txt');
 
         // restore_error_handler can emit an E_WARNING; let's ignore that, as
@@ -266,6 +272,7 @@ class Zend_Filter_HtmlEntitiesTest extends PHPUnit_Framework_TestCase
         } catch (Zend_Filter_Exception $e) {
             $this->assertTrue($e instanceof Zend_Filter_Exception);
         }
+        restore_error_handler();
     }
 
     /**

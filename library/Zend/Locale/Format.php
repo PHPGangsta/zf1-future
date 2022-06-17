@@ -183,7 +183,7 @@ class Zend_Locale_Format
 
     /**
      * Changes the numbers/digits within a given string from one script to another
-     * 'Decimal' representated the stardard numbers 0-9, if a script does not exist
+     * 'Decimal' represented the standard numbers 0-9, if a script does not exist
      * an exception will be thrown.
      *
      * Examples for conversion from Arabic to Latin numerals:
@@ -289,7 +289,7 @@ class Zend_Locale_Format
 
     /**
      * Returns a locale formatted number depending on the given options.
-     * The seperation and fraction sign is used from the set locale.
+     * The separation and fraction sign is used from the set locale.
      * ##0.#  -> 12345.12345 -> 12345.12345
      * ##0.00 -> 12345.12345 -> 12345.12
      * ##,##0.00 -> 12345.12345 -> 12,345.12
@@ -513,6 +513,7 @@ class Zend_Locale_Format
      */
     public static function isNumber($input, array $options = [])
     {
+        $input = (string)$input;
         if (!self::_getUniCodeSupport()) {
             trigger_error("Sorry, your PCRE extension does not support UTF8 which is needed for the I18N core", E_USER_NOTICE);
         }

@@ -348,7 +348,7 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
         set_error_handler([$this, 'handleErrors']);
         $this->assertFalse(Zend_Loader_Autoloader::autoload('ZendLoaderAutoloader_Bar'));
         restore_error_handler();
-        $this->assertNotNull($this->error);
+        $this->assertNull($this->error);
     }
 
     public function testAutoloadShouldReturnTrueIfFunctionBasedAutoloaderMatchesAndReturnsNonFalseValue()

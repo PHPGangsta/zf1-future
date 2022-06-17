@@ -21,7 +21,7 @@
  */
 
 
-$PHPUNIT = __DIR__ . '/../bin/phpunit';
+$PHPUNIT = __DIR__ . '/../vendor/zf1s/phpunit/composer/bin/phpunit';
 if (!is_executable($PHPUNIT)) {
     echo "PHPUnit is not executable ($PHPUNIT)";
     exit;
