@@ -115,7 +115,7 @@ class Zend_Reflection_Parameter extends ReflectionParameter
      *
      * @return string
      */
-    public function getType(): ?\ReflectionType
+    public function getType()
     {
         try {
             if ($docblock = $this->getDeclaringFunction()->getDocblock()) {

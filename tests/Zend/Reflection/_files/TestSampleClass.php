@@ -176,7 +176,7 @@ class Zend_Reflection_Docblock_Param_WithNamespace
 {
     /**
      * @param Zend\Foo\Bar $var desc
-     * @return void
+     * @return Zend\Reflection\Docblock
      */
     public function doSomething()
     {

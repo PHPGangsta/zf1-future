@@ -131,6 +131,9 @@ class Zend_Server_Reflection_ClassTest extends PHPUnit_Framework_TestCase
     public function test__wakeup()
     {
         $r = new Zend_Server_Reflection_Class(new ReflectionClass('Zend_Server_Reflection'));
+        if (PHP_VERSION_ID >= 70400) {
+            $this->setExpectedException('Exception', "Serialization of 'ReflectionMethod' is not allowed");
+        }
         $s = serialize($r);
         $u = unserialize($s);
 
